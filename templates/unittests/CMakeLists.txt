@@ -13,13 +13,13 @@ target_sources(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME}
 	PRIVATE
-		${PROJECT_ROOT}/templateApp/src
+		${PROJECT_ROOT}/templates/src
 )
 
 # Link the test executable with GoogleTest libraries
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
-		templateApp_sources # Sources to be unittested
+		templates_sources # Sources to be unittested
 		gtest         # Core GoogleTest library
 		gtest_main    # Optional, provides a default main() for tests
 )

@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.28)
 
-project ("templateApp" LANGUAGES CXX)
+project ("templates" LANGUAGES CXX)
 
 message(CMaking: ${PROJECT_NAME})
 
@@ -11,12 +11,13 @@ add_library(${PROJECT_NAME}_sources STATIC)
 
 target_sources(${PROJECT_NAME}_sources
     PRIVATE
-        src/myClass.cpp
+        src/millisecond.cpp
+        src/ejercicios.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_sources
     PRIVATE
-        ${PROJECT_ROOT}/templateApp/src
+        ${PROJECT_ROOT}/templates/src
 )
 
 #######################################################################
@@ -31,7 +32,7 @@ target_sources(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        ${PROJECT_ROOT}/templateApp/src
+        ${PROJECT_ROOT}/templates/src
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -39,4 +40,4 @@ target_link_libraries(${PROJECT_NAME}
         ${PROJECT_NAME}_sources
 )
 
-add_subdirectory(unittests)
+#add_subdirectory(unittests)
