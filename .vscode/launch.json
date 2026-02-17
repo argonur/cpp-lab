@@ -8,7 +8,7 @@
             "name": "Debug unit tests",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/templateApp/unittests/unitTests",
+            "program": "${workspaceFolder}/build/templates/templates",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
