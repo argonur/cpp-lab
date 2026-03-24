@@ -6,3 +6,5 @@ void nontypeTemplateParameter();
 void problemaConCArrays();
 void ejercicio2();
 void comparaciónSafeArray();
+void ejercicio3();
+void sfinaeExample();

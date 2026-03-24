@@ -76,37 +76,35 @@ void problemaConCArrays() {
 
 
 /*
-Aufgabe: SafeArray
-1. Schreibe ein Klassen-Template SafeArray mit Template Parametern für Element-Typ und Größe. Zwei
-Member Funktionen get und set sollen das Lesen und Speichern von Elementen ermöglichen. Intern soll
-zur Speicherung der Daten ein normales C-Array verwendet werden.
-2. Wenn der Index der get Funktion ungültig ist, soll ein Default-Wert zurückgegeben werden. Der Default-Wert
-soll per Konstruktor gesetzt werden können. Der Konstruktor soll außerdem alle Werte des SafeArray zu
-Beginn auf diesen Default setzen.
+Tarea: SafeArray
+1. Escribe un template de clase SafeArray con parámetros de template para el tipo de elemento y el tamaño. Dos funciones miembro get y set deben permitir la lectura y escritura de elementos. Internamente, se debe usar un array C normal para almacenar los datos.
+2. Si el índice de la función get es inválido, se debe devolver un valor predeterminado. El valor predeterminado debe poder establecerse mediante el constructor. El constructor también debe establecer todos los valores del SafeArray inicialmente en este valor predeterminado.
 */
 void ejercicio2() {
 
     std::cout << "Ejercicio 2: SafeArray" << std::endl;
 
    // Aufgabenteil 1
-    SafeArray<int, 2> arr1(0); // 2 int-Werte, default value 0
+    SafeArray<int, 2> arr1(0); // 2 valores int, valor predeterminado 0
     int value = 10;
-    arr1.set(0, value); // Erstes Element schreiben
-    int res = arr1.get(0); // Erstes Element lesen
+    arr1.set(0, value); // Escribir primer elemento
+    int res = arr1.get(0); // Leer primer elemento
 
-    std::cout << "arr1.get(0) = " << res << std::endl; // Erwartet: res ist 10, da wir diesen Wert gesetzt haben
+    std::cout << "arr1.get(0) = " << res << std::endl; // Esperado: res es 10, ya que hemos establecido este valor
 
     // Aufgabenteil 2
     static const int invalidValue = -1;
     SafeArray<int, 2> arr2(invalidValue);
-    int res2 = arr2.get(3); // Erwartet: res ist invalidValue, da der Index ungültig ist
+    int res2 = arr2.get(3); // Esperado: res es invalidValue, ya que el índice es inválido
 
-    std::cout << "arr2.get(3) = " << res2 << std::endl; // Erwartet: res ist -1, da der Index ungültig ist
+    std::cout << "arr2.get(3) = " << res2 << std::endl; // Esperado: res es -1, ya que el índice es inválido
 
     std::cout << "-----------------------------------" << std::endl;
 }
 
 void comparaciónSafeArray() {
+
+    std::cout << "Comparación de SafeArray:" << std::endl;
     
     SafeArray<int,2> arrA(0); 
     arrA.set(0, 1); 
@@ -118,5 +116,58 @@ void comparaciónSafeArray() {
     
     bool equal = (arrA == arrB);
     
-    std::cout << "Arrays sind gleich: " << (equal ? "true" : "false") << "\n";
+    std::cout << "Los arrays son iguales: " << (equal ? "true" : "false") << "\n";
+
+        std::cout << "-----------------------------------" << std::endl;
+}
+
+/*
+Tarea: Un memcpy mejor
+void* memcpy( void* dest, const void* src, std::size_t count );
+
+Copia count bytes desde el objeto apuntado por src al objeto apuntado por dest.
+
+1. Examina la salida del punto de inicio enlazado. Deberían copiarse todos los elementos del array fuente al array destino posición por posición. ¿Qué sale mal? ¿Por qué?
+2. Escribe una función template copy_items, que pueda usarse como memcpy, pero que mediante su signatura evite con un error de compilación que se llame incorrectamente (como en el ejemplo de abajo). Como tercer parámetro, en lugar de la longitud en bytes, se debe especificar el número de elementos a copiar. La función debería usar internamente el memcpy normal.
+*/
+
+void ejercicio3() {
+
+    std::cout << "Ejercicio 3: Un memcpy mejor" << std::endl;
+
+    int src[5] = {1, 2, 3, 4, 5};
+    int dest[5] = {0};
+
+    // Llamada incorrecta a memcpy - conduce a comportamiento indefinido
+    //memcpy(dest, src, sizeof(src)); // Esto copia los bytes, pero no los elementos correctamente
+
+    // Llamada correcta a la función template copy_items
+    copy_items(dest, src, 5); // Copia 5 elementos de src a dest
+
+    std::cout << "dest array after copy_items: ";
+    for (int i = 0; i < 5; ++i) {
+        std::cout << dest[i] << " "; // Esperado: 1 2 3 4 5
+    }
+    std::cout << std::endl;
+
+    std::cout << "-----------------------------------" << std::endl;
+}
+
+void sfinaeExample() {
+
+    std::cout << "Ejemplo de SFINAE:" << std::endl;
+
+    struct S_with_x { int x = 42; };
+    struct S_with_y { int y = 7; };
+    struct S_without { };
+    
+    S_with_x sx;
+    S_with_y sy;
+    S_without swo;
+
+    print_x_or_y(sx);
+    print_x_or_y(sy);
+    //print_x_or_y(swo); //no instance of overloaded function "print_x_or_y" matches the argument list
+
+    std::cout << "-----------------------------------" << std::endl;
 }

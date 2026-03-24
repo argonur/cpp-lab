@@ -22,5 +22,11 @@ int main() {
     // Comparación de SafeArray
     comparaciónSafeArray();
 
+    // Ejercicio 3: Un memcpy mejor
+    ejercicio3();
+
+    // ejemplo SFINAE
+    sfinaeExample();
+
     return 0;
 }

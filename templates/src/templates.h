@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstring>
+#include <iostream>
+
 /*
 Templates de Función
 
@@ -16,7 +19,7 @@ El tipo real de T (argumento de template) se determina solo cuando se llama la f
 
 template<typename T>
 T max (T a, T b) {
-return b < a ? a : b;
+    return b < a ? a : b;
 }
 
 /*
@@ -56,9 +59,9 @@ T pow(T base, int exp)
 }
 
 /*
-Template Parameter können statt Typ auch einen Wert angeben.
-Möglich sind: Integral-Werte, Enums und Pointer auf Objekte. Ab C++20 alle Literal Types.
-Hier müssen bei Function Templates <> Klammern verwendet werden.
+Los parámetros de template pueden especificar un valor en lugar de un tipo.
+Posibles son: valores integrales, enums y punteros a objetos. Desde C++20 todos los tipos literales.
+Aquí se deben usar corchetes <> para los templates de función.
 */
 
 template <int Multiplier>
@@ -70,10 +73,10 @@ int MultWith(int value) {
 Class Templates
 
 template<class T>
-struct vector {  Implementierung };
+struct vector {  Implementación };
 
-Analog zu Funktionen können auch ganze Klassen mit Typen parametriert werden.
-Die meist-verwendeten Klassentemplates in C++ sind die Container Typen der Standardbibliothek.
+Análogamente a las funciones, también se pueden parametrizar clases enteras con tipos.
+Los templates de clase más utilizados en C++ son los tipos contenedor de la biblioteca estándar.
 
 Example:
 
@@ -91,13 +94,13 @@ float val = data.read();
 */
 
 /*
-Sichere Arrays
+Arrays seguros
 
-Können wir mit Templates C-Arrays nachbilden und besser machen?
-Größe des Arrays ist zur Compile-Zeit fixiert.
-Lesen/Schreiben von Elementen über get und set Methoden.
-Schutz vor Überlauf.
-Vernünftiges Verhalten für Vergleiche verschiedener Arrays.
+¿Podemos recrear arrays C con templates y mejorarlos?
+El tamaño del array está fijado en tiempo de compilación.
+Lectura/escritura de elementos mediante métodos get y set.
+Protección contra desbordamiento.
+Comportamiento razonable para comparaciones de diferentes arrays.
 */
 
 /*
@@ -129,16 +132,16 @@ public:
     }
 
 /*
-Der Vergleichs-Operator
+El operador de comparación
 
 int main() {
 SafeArray<int,2> arrA; arrA[0] = 1; arrA[1] = 2;
 SafeArray<int,2> arrB; arrB[0] = 1; arrB[1] = 2;
 bool equal = (arrA == arrB);
-std::cout << "Arrays sind gleich: " << equal << "\n";
+std::cout << "Los arrays son iguales: " << equal << "\n";
 }
 
-Die SafeArray Klasse muss einen Vergleichs-Operator definieren, damit dieser Code kompilieren kann.
+La clase SafeArray debe definir un operador de comparación para que este código pueda compilar.
 */
 
 
@@ -159,32 +162,32 @@ private:
 };
 
 /*
-Template Code organisieren
+Organizar código de template
 
-// Deklaration (im Header)
+// Declaración (en el header)
 template <int value>
 inline int get();
 
-// Definition (auch im Header!)
+// Definición (¡también en el header!)
 template <int value>
 inline int get() { return value; }
 
-Template Funktionen immer als inline definieren. 
-Empfehlung: Template-Funktionen und -Klassen nicht deklarieren (nur definieren).
+Siempre definir funciones template como inline. 
+Recomendación: No declarar funciones y clases template (solo definir).
 
-Template Funktionen und Klassen müssen vollständig in Header-Dateien definiert werden, 
-damit der Compiler sie bei der Instanziierung korrekt generieren kann. Es ist nicht möglich, 
-die Deklaration und Definition von Template Funktionen oder Klassen in separate Dateien zu trennen, 
-wie es bei normalen Funktionen oder Klassen üblich ist. 
-Daher sollten Template Funktionen und Klassen immer in Header-Dateien definiert werden, um sicherzustellen, 
-dass sie korrekt instanziiert werden können, wenn sie in anderen Teilen des Programms verwendet werden. 
-Es ist auch eine gute Praxis, Template Funktionen als inline zu deklarieren, 
-um mögliche Mehrfachdefinitionen zu vermeiden, wenn die Header-Datei in mehreren Übersetzungseinheiten inkludiert wird.
+Las funciones y clases template deben definirse completamente en archivos de header,
+para que el compilador pueda generarlas correctamente durante la instanciación. No es posible,
+separar la declaración y definición de funciones o clases template en archivos separados,
+como es habitual con funciones o clases normales. 
+Por lo tanto, las funciones y clases template siempre deberían definirse en archivos de header para asegurar,
+que puedan instanciarse correctamente cuando se usan en otras partes del programa. 
+También es una buena práctica declarar funciones template como inline,
+para evitar posibles definiciones múltiples cuando el archivo de header se incluye en múltiples unidades de traducción.
 
 */
 
 /*
-Automatische Template Auswahl bei Funktionen
+Selección automática de template en funciones
 
 template<typename T>
 T max (T a, T b) {
@@ -193,32 +196,32 @@ T max (T a, T b) {
 int i1=1; int i2=2;
 max(i1,i2); // T=int
 
-1. Bisher bei Aufruf von Function Templates die Template Argumente nicht angegeben.
-2. Der Compiler versucht dann die Template Argumente automatisch zu deduzieren.
-3. Eine manuelle Angabe ist immer möglich und bspw. bei Nontype Template Argumenten nötig.
+1. Hasta ahora, al llamar a templates de función, los argumentos de template no se especifican.
+2. El compilador entonces intenta deducir los argumentos de template automáticamente.
+3. Una especificación manual siempre es posible y por ejemplo necesaria para argumentos de template no tipo.
 
 max<int>(i1,i2); // T=int
-max<long>(i1,i2); // T=long -> i1 und i2 werden automatisch von int auf long gecastet
+max<long>(i1,i2); // T=long -> i1 e i2 se convierten automáticamente de int a long
 */
 
 /*
-Begriffe: Template vs. Call Parameter
+Conceptos: Parámetro de Template vs. Parámetro de Llamada
 
 template <typename T>
 void bar(T* val) { printf("bar(T*) called.\n");
 int i=2;
 bar(&i);
 
-Template Parameter werden in <> angegeben.
-Call Parameter gehören zur Signatur und beziehen sich auf Template Parameter.
-T ist ein Template Parameter →Deduzierung zum Template Argument int.
-val ist ein Call Parameter →Hier instantiiert mit int*
+Los parámetros de template se especifican en <>.
+Los parámetros de llamada pertenecen a la signatura y se refieren a parámetros de template.
+T es un parámetro de template →Deducción al argumento de template int.
+val es un parámetro de llamada →Aquí instanciado con int*
 */
 
 /*
-Auswahl von Alternativen: Überladung
+Selección de alternativas: Sobrecarga
 
-Übliche Überladung von Funktionen in C++
+Sobrecarga habitual de funciones en C++
 
 void foo(int val) { printf("foo(int) called.\n"); }
 void foo(int* val) { printf("foo(int*) called.\n");
@@ -227,7 +230,7 @@ int i=2;
 foo(i); // foo(int) called
 foo(&i) // foo(int*) called
 
-Intuitiv gleiche Funktionsweise bei Templates
+Funcionalidad intuitivamente igual en templates
 
 template <typename T>
 void bar(T val) { printf("bar(T) called.\n"); }
@@ -240,12 +243,12 @@ bar(&i) // bar(T*) called
 */
 
 /*
-Regeln für Überladung
+Reglas para sobrecarga
 
-Überladung bei Templates funktioniert ähnlich wie bei normalen Funktionen.
-Komplexe interne Regeln erzeugen meist intuitive Ergebnisse.
-Normale Funktionen und Template Funktionen lassen sich mischen.
-Normale Funktionen werden Template Funktionen vorgezogen.
+La sobrecarga en templates funciona de manera similar a las funciones normales.
+Reglas internas complejas producen generalmente resultados intuitivos.
+Las funciones normales y las funciones template se pueden mezclar.
+Las funciones normales se prefieren sobre las funciones template.
 
 void func(int val) { printf("A) func(int) called.\n"); }
 
@@ -260,10 +263,10 @@ func(&i); // (2)
 func(s); // (3)
 func(&s); // (4)
 
-(1) func(int) called. → Normale Funktion wird vorgezogen
-(2) func(T*) called. → Template Funktion wird vorgezogen, da keine normale Funktion mit int* existiert.
-(3) func(int) called. → Normale Funktion wird vorgezogen, da short zu int konvertiert werden kann.
-(4) func(short*) called. → Normale Funktion wird vorgezogen, da short* zu short* passt.
+(1) func(int) called. → Se prefiere la función normal
+(2) func(T*) called. → Se prefiere la función template, ya que no existe función normal con int*.
+(3) func(int) called. → Se prefiere la función normal, ya que short se puede convertir a int.
+(4) func(short*) called. → Se prefiere la función normal, ya que short* coincide con short*.
 
 Resumen de la Lógica de Prioridad
 
@@ -374,4 +377,162 @@ Para un tipo genérico T:
 Esa decisión impacta rendimiento y restricciones del template.
 
 */
+
+/*
+CTAD (Class Template Argument Deduction o Deducción de Argumentos de Plantillas de Clase).
+
+Lo que te quiere decir, en términos sencillos, es que ya no tienes que ser tan redundante al escribir código. 
+
+Aquí tienes el desglose:
+
+1. El cambio principal (C++17)
+
+Antes de C++17, cuando querías crear un objeto de una clase con plantillas, tenías que decirle al compilador el tipo de dato dos veces: 
+una en la declaración y otra en el constructor (o dejar que el compilador lo infiriera mediante funciones auxiliares como std::make_pair).
+
+Ahora, el compilador es capaz de mirar los argumentos que le pasas al constructor y deducir el tipo automáticamente.
+
+2. Análisis de los ejemplos
+
+Compara tres formas de instanciar la estructura DataHolder:
+
+    DataHolder<float> data1(2.0f);
+
+        Cómo funciona: Especificas explícitamente que T es float.
+
+        Compatibilidad: Funciona en todas las versiones de C++. Es la forma "clásica".
+
+    DataHolder data2(2.0f);
+
+        Cómo funciona: No escribes <float>. El compilador ve que 2.0f es un literal de tipo float y deduce que T = float.
+
+        Requisito: Solo funciona a partir de C++17.
+
+    DataHolder data3(4);
+
+        Cómo funciona: El compilador ve un entero (4) y deduce automáticamente que T = int.
+
+        Requisito: También requiere C++17.
+
+3. Notas importantes de la diapositiva
+
+    Deducción Automática: El compilador siempre intentará adivinar el tipo por ti si no se lo das.
+
+    Especificación Manual: Sigue siendo posible (y a veces necesario) indicar el tipo manualmente.
+
+    Casos Obligatorios: La diapositiva menciona que la indicación manual sigue siendo necesaria para Nontype Template Arguments 
+    (argumentos que no son tipos, como un tamaño de array template <int N>) o cuando el compilador no tiene suficiente información para deducir.
+
+En resumen: C++17 hace que el código sea más limpio y menos propenso a errores de "copiar y pegar" al permitir que el compilador deduzca el tipo 
+de la clase directamente desde el constructor.
+*/
+
+/*
+Template function to copy elements from one array to another.
+This is a safer alternative to memcpy because it deduces the type T automatically,
+preventing errors that could occur with memcpy when dealing with non-byte-aligned data.
+*/
+template<typename T>
+void copy_items(T* dest, const T* src, std::size_t count) {
+    std::memcpy(dest, src, count * sizeof(T)); // Copiar la cantidad correcta de bytes
+}
+
+/*
+Pruebas para Templates
+
+¿Cómo se pueden probar funciones normales?
+
+Un programa extra con pruebas unitarias.
+Pruebas integradas con assert().
+
+¿Cómo se pueden probar templates?
+
+static_assert permite pruebas en tiempo de compilación.
+La condición debe ser una expresión constexpr.
+
+static constexpr int S = 2;
+static_assert(S == 3, "S no es 3");
+
+~] $ <source>:2:17: error: static assertion failed: S no es 3 static_assert(S == 3, "S no es 3")
+*/
+
+/*
+Type Traits
+
+Type Traits
+„trait n. ... a distinctive feature characterizing a thing.“ New Shorter Oxford English Dictionary
+
+Los Type Traits en C++ describen propiedades de un tipo de datos.
+Muchas propiedades prácticas en #include <type_traits> .
+Resumen: https://en.cppreference.com/w/cpp/header/type_traits
+Los traits son siempre expresiones constexpr.
+
+bool int_signed = std::is_signed_v<int>; // true
+bool int_signed_old = std::is_signed<int>::value; // true, hasta C++17 solo posible así!
+bool uchar_signed = std::is_signed_v<unsigned char>; // false
+
+int x = 3; // decltype(x) -> int
+static_assert(std::is_const_v<decltype(x)>, "Variable is not const!"); // static assert failed
+*/
+
+/*
+Type Traits y static_assert
+
+Los tipos no se pueden comparar directamente en C++.
+
+static_assert(T != float, "¡Aquí no floats!"); // Código inválido!
+
+template <typename T>
+struct DataHolder {
+    DataHolder(T value) : m_value(value) { }
+    static_assert(!std::is_same_v<T,float>, "Floats are not allowed here.")
+private:
+    T m_value;
+};
+
+DataHolder<int> data1(2);
+DataHolder<float> data2(2.0f); // static assertion failed: Floats are not allowed here
+*/
+
+/*
+Distinciones en tiempo de compilación
+*/
+
+/*
+Substitution Failure Is Not An Error (SFINAE)
+
+„This rule applies during overload resolution of function templates: When substituting the explicitly
+specified or deduced type for the template parameter fails, the specialization is discarded from the
+overload set instead of causing a compile error.“
+https://en.cppreference.com/w/cpp/language/sfinae
+
+template <typename T>
+decltype(T::x) print_x_or_y(T val) {
+    std::cout << "T has member x. Value: " << val.x;
+    return val.x;
+}
+
+struct S_with_x { int x = 42; };
+struct S_without { };
+
+S_with_x sx;
+S_without swo;
+
+print_x_or_y(sx);
+print_x_or_y(swo);
+*/
+
+/*SFINAE para distinción*/
+
+template <typename T>
+decltype(T::x) print_x_or_y(T val) {
+    std::cout << "T has member x. Value: " << val.x << std::endl;
+    return val.x;
+}
+
+template <typename T>
+decltype(T::y) print_x_or_y(T val) {
+    std::cout << "T has member y. Value: " << val.y << std::endl;
+    return val.y;
+}
 
