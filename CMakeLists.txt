@@ -10,3 +10,5 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 #add_subdirectory(3rdParty/googletest)
 add_subdirectory(templates)
+add_subdirectory(containers)
+add_subdirectory(callbacks)
