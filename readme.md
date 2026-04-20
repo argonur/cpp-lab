@@ -1,74 +1,120 @@
-# Cpp template application and unit tests
+# C++ Lab
 
-This is a C++ template project to create a C++ App and test its code with googletest.
+Base de conocimiento y entorno de experimentación para C++ moderno.
 
-## Submodules
+Este repositorio documenta mi exploración continua de C++, con enfoque en entender el lenguaje más allá del uso superficial: cómo se comportan sus features, cuándo usarlos y en qué escenarios fallan.
 
-This project uses git submodules.
-After cloning this repository, the submodules directories will be there, but empty. You must run two commands: `git submodule init` to initialize your local configuration file, and `git submodule update` to fetch all the data from those projects and check out the appropriate commits listed in the superproject.
+---
 
-If a new submodule is needed, it can be added as follows:
+## 🎯 Propósito
 
-```sh
-git submodule add <repo_address> <3rdParty/name_of_repo_folder>
-```
+Este no es un repositorio tipo tutorial.
 
-The repository referenced by *repo_address* will be cloned into the folder *name_of_folder*, which should not exist yet.
+Es un **sistema de aprendizaje a largo plazo** construido alrededor de:
 
-After adding the submodule with the command above, the desired tag of the submodule repository should be checked out and the changes must be commited.
+* Estudiar features de distintas versiones del estándar (C++11 → C++20+)
+* Descomponer temas complejos (multithreading, memoria, embedded)
+* Validar conceptos mediante código
+* Construir una referencia personal confiable
 
-## Needed software
+---
 
-### CMake
+## 🧠 Enfoque
 
-CMake is a free, cross-platform, software development tool for building applications via compiler-independent instructions. It also can automate testing, packaging and installation. It runs on a variety of platforms and supports many programming languages. And more importantly, it is a tool used in this project. Currently the minimum version required to build this project is the 3.28.
+El aprendizaje pasivo no escala.
 
-To install CMake there are at least two options.
+Este repositorio sigue un enfoque distinto:
 
-#### Option 1
+* Cada concepto se documenta después de ser estudiado y cuestionado
+* Siempre que es posible, se valida con código
+* El objetivo no es cubrir todo, sino lograr **profundidad y claridad**
 
-```sh
-sudo apt install cmake
-cmake --version
-```
+Pregunta clave detrás de cada tema:
 
-If the version installed is equal or greater than 3.28 you´re good to go.
+> ¿Entiendo esto lo suficiente como para usarlo correctamente en un entorno real?
 
-#### Option 2
+---
 
-```sh
-sudo apt remove --purge --auto-remove cmake
-version=3.28
-build=5
-mkdir ~/temp
-cd ~/temp
-wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz
-tar -xzvf cmake-$version.$build.tar.gz
-cd cmake-$version.$build/
-./bootstrap
-make -j4
-sudo make install
-cmake --version
-```
+## 📚 Estructura
 
-## Compilation
+El repositorio está organizado en:
 
-### VS Code
+### 🔹 Estándares de C++
 
-A build task was defined, to start the building process just press "Ctrl + Shift + B".
+* [C++11](notes/cpp11.md)
+* C++14
+* C++17
+* [C++20](notes/cpp20.md)
 
-### Release version
+Cada sección incluye:
 
-The *cmake_build_release.sh* script is intended to build a release version of the application.
+* Features principales
+* Explicación conceptual
+* Ejemplos prácticos
 
-## Debugging
+---
 
-*gdb* must be installed in order to debug. If *gdb* is not installed execute the following command:
+### 🔹 Temas clave
 
-```sh
-sudo apt install gdb
-```
+* Multithreading
+* Manejo de memoria
+* [Conceptos relacionados con sistemas embebidos](notes/embeddedCpp.md)
+* Otros temas relevantes a nivel de sistemas
 
-To debug the unit tests a VS Code configuration was added (*launch.json*). To start debugging just set a breakpoint in a test or source file and press **F5**. The unit tests will be launched and the execution will stop at the breakpoint. By default *online* tests are excluded. Modify the *args* parameter of the *launch.json* file to include them.
+---
 
-**Cheers mate!**
+### 🔹 Experimentos y código
+
+El código se utiliza para:
+
+* Validar comportamiento
+* Explorar casos límite
+* Entender trade-offs
+
+No todos los ejemplos están pensados como código de producción; muchos son deliberadamente mínimos para aislar conceptos.
+
+---
+
+## 🚧 Estado del proyecto
+
+Este repositorio está en evolución constante.
+
+* Se agregan nuevos temas continuamente
+* Algunas secciones pueden estar incompletas
+* El contenido existente se refina con el tiempo
+
+---
+
+## 🧩 Cómo usar este repositorio
+
+Puedes usar este repo como:
+
+* Referencia de conceptos de C++
+* Material de estudio para entrevistas
+* Punto de partida para explorar temas específicos
+
+Pero está diseñado principalmente como:
+
+> Un sistema personal para pensar con claridad sobre C++
+
+---
+
+## ⚠️ Nota importante
+
+Este no es un recurso definitivo.
+
+Refleja un entendimiento en evolución de C++, incluyendo errores, correcciones y mejoras con el tiempo.
+
+---
+
+## 📌 Por qué existe este repositorio
+
+Herramientas como ChatGPT facilitan obtener respuestas.
+
+Pero el entendimiento real requiere:
+
+* Reconstruir el conocimiento
+* Organizarlo
+* Cuestionarlo
+
+Este repositorio existe para hacer exactamente eso.
