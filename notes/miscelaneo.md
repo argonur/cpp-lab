@@ -6,3 +6,4 @@
 - [Naming (diferentes cases)](misc/cases.md)
 - cast
 - orden de los constructores
+- [pointer to pointer](misc/p2p.md)

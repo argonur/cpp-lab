@@ -11,7 +11,7 @@ Features clave:
 - [range-based for](cpp11/range-based_for.md)
 - [lambda expressions](cpp11/lambda.md)
 - [move semantics (rvalue references &&)](cpp11/move_semantics.md)
-- std::thread (multithreading nativo)
+- [std::thread (multithreading nativo)](cpp11/thread.md)
 - [smart pointers (unique_ptr, shared_ptr)](cpp11/smart_pointers.md)
 - [enum class (type-safe)](cpp11/enum_class.md)
 - [constexpr](cpp11/constexpr.md)
