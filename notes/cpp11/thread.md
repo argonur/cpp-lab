@@ -442,6 +442,7 @@ Riesgos:
 
 - `std::mutex`
 - `std::lock_guard`
+- [`std::unique_lock`](thread/unique_lock.md)
 - `std::condition_variable`
 - `std::atomic`
 

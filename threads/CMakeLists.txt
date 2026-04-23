@@ -11,7 +11,7 @@ add_library(${PROJECT_NAME}_sources STATIC)
 
 target_sources(${PROJECT_NAME}_sources
     PRIVATE
-        src/myThreads.cpp
+        src/threadPool.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_sources
