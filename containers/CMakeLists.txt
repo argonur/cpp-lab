@@ -12,6 +12,7 @@ add_library(${PROJECT_NAME}_sources STATIC)
 target_sources(${PROJECT_NAME}_sources
     PRIVATE
         src/myVector.cpp
+        src/myList.cpp
 )
 
 target_include_directories(${PROJECT_NAME}_sources
