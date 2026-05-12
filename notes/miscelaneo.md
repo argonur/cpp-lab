@@ -10,4 +10,5 @@
 - [Constructores y destructores con herencia en C++](misc/ordenConstDest.md)
 - [pointer to pointer](misc/p2p.md)
 - [RAII](RAII.md)
+- [static classes](misc/staticClasses.md)
 - anonymous namespace

@@ -16,6 +16,7 @@
 - static (storage duration, linkage)
   - [static fuera de clases](embedded/staticFuera.md)
   - [static en clases](embedded/staticEnClases.md)
+  - [static classes](misc/staticClasses.md)
   - [storage duration](embedded/storageDuration.md)
 - Punteros vs referencias
 - [extern](embedded/extern.md)
